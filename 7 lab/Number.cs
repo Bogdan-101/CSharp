@@ -3,13 +3,21 @@ using System.Linq;
 
 namespace TestSolutionn
 {
-    public struct Number :IComparable<Number>
+    public struct Number :IComparable<Number>, IEquatable<Number>
     {
-        private int n;
-        private int m;
+        readonly int n;
+        readonly int m;
 
-        public Number(string str)
+        public Number(int n, int m)
         {
+            this.n = n;
+            this.m = m;
+        }
+        
+        
+        public static Number Parse(string str)
+        {
+            int n, m = 0;
             var isAfter = false;
             var nBuffer = "";
             var mBuffer = "";
@@ -36,6 +44,10 @@ namespace TestSolutionn
                 n = Int32.Parse(nBuffer);
             
             m = Int32.Parse(mBuffer);
+
+            Number num = new Number(n, m);
+            
+            return num;
         }
 
         public static bool IsCorrect(string str)
@@ -66,59 +78,42 @@ namespace TestSolutionn
             return true;
         }
 
-        public string Print()
+        public bool Equals(Number other)
+        {
+            return n == other.n && m == other.m;
+        }
+
+        public override string ToString()
         {
             return Convert.ToString(n) + "/" + Convert.ToString(m);
         }
-
+        
         public static string operator + (Number a, Number b)
         {
-            var c = new Number();
-
-            var buffer = new Number {n=a.n, m=a.m };
+            var c = new Number(a.n*b.m + b.n*a.m, b.m*a.m);
             
-            a.n *= b.m;
-            a.m *= b.m;
-            b.n *= buffer.m;
-            b.m *= buffer.m;
-
-            c.n = a.n + b.n;
-            c.m = a.m;
-            return c.Print();
+            return c.ToString();
         }
         
         public static string operator - (Number a, Number b)
         {
-            var c = new Number();
-            var buffer = new Number {n=a.n, m=a.m };
+            var c = new Number(a.n*b.m - b.n*a.m, b.m*a.m);
             
-            a.n *= b.m;
-            a.m *= b.m;
-            b.n *= buffer.m;
-            b.m *= buffer.m;
-
-            c.n = a.n - b.n;
-            c.m = a.m;
-            return c.Print();
+            return c.ToString();
         }
         
         public static string operator * (Number a, Number b)
         {
-            var c = new Number {n = a.n * b.n, m = a.m*b.m};
+            var c = new Number (a.n * b.n, a.m*b.m);
 
-            return c.Print();
+            return c.ToString();
         }
         
         public static string operator / (Number a, Number b)
         {
-            var buffer = b.m;
-            b.m = b.n;
-            b.n = buffer;
-
-            Number c;
-            c.n = a.n * b.n;
-            c.m = a.m * b.m;
-            return c.Print();
+            var c = new Number(a.n*b.m, a.m*b.n);
+            
+            return c.ToString();
         }
         
         public static bool operator != (Number a, Number b)
@@ -138,14 +133,8 @@ namespace TestSolutionn
                 return 0;
             }
             
-            var buffer = new Number {n=a.n, m=a.m };
-            
-            a.n *= b.m;
-            a.m *= b.m;
-            b.n *= buffer.m;
-            b.m *= buffer.m;
-
-            return a.n < b.n?(-1):1;
+            var c = new Number(a.n * b.m, b.n * a.m);
+                return c.n < c.m?(-1):1;
         }
         
         public static int operator > (Number a, Number b)
@@ -155,27 +144,15 @@ namespace TestSolutionn
                 return 0;
             }
             
-            var buffer = new Number {n=a.n, m=a.m };
-            
-            a.n *= b.m;
-            a.m *= b.m;
-            b.n *= buffer.m;
-            b.m *= buffer.m;
-
-            return a.n > b.n?(-1):1;
+            var c = new Number(a.n * b.m, b.n * a.m);
+            return c.n > c.m?(-1):1;
         }
         
         public int CompareTo(Number b)
         {
-            var buffer = new Number {n=this.n, m=this.m };
-            
-            n *= b.m;
-            m *= b.m;
-            b.n *= buffer.m;
-            b.m *= buffer.m;
+            var c = new Number(n * b.m, b.n * m);
 
-            return n.CompareTo(b.n);
-            
+            return c.m.CompareTo(c.n);
         }
         
     }

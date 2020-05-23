@@ -11,14 +11,7 @@ namespace TestSolutionn
         {
             Console.WriteLine("Enter a:");
             var a = Console.ReadLine();
-            /*while (a == null || (a.IndexOf('/') == (-1) ||
-                                 !(int.TryParse(a.Remove(0, a.IndexOf('/')), out var result)) ||
-                                 string.IsNullOrEmpty(a)))
-            {
-                Console.WriteLine("Error, try again");
-                a = Console.ReadLine();
-            }*/
-            
+
             while (!Number.IsCorrect(a))
             {
                 Console.WriteLine("Error, try again");
@@ -32,8 +25,10 @@ namespace TestSolutionn
                 Console.WriteLine("Error, try again");
                 b = Console.ReadLine();
             }
-            var A = new Number(a);
-            var B = new Number(b);
+            var A = new Number();
+            var B = new Number();
+            A = Number.Parse(a);
+            B = Number.Parse(b);
             Console.WriteLine($"a + b = {A + B}");
             Console.WriteLine($"a - b = {A - B}");
             Console.WriteLine($"a * b = {A * B}");
@@ -46,14 +41,14 @@ namespace TestSolutionn
             //Сейчас сделаем массив из чисел, чтобы продемонстрировать работу IComparable:
 
             
-            Number C=new Number("3/8");
-            Number D=new Number("6/8");
+            Number C=new Number(3, 8);
+            Number D=new Number(6, 8);
             Number[] objectList = new Number[] {A, B, C, D};
 
             Array.Sort(objectList);
             foreach (var t in objectList)
             {
-                Console.WriteLine(t.Print());
+                Console.WriteLine(t.ToString());
             }
             
         }
