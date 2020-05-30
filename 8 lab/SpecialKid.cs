@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestSolution.Properties
+namespace TestSolutionn.Properties
 {
     public class SpecialKid: Student, IPerson
     {
@@ -13,15 +13,21 @@ namespace TestSolution.Properties
         {
             this._fac = fac;
         }
-        
-        protected override string GetYearInfo()
+
+        public override string GetYearInfo()
         {
             return base.GetYearInfo() + ", " + _fac;
         }
 
         public event EventHandler<GetPrintEventArgs> GetPrint;        //Прототип события
-        
-        public override void PrintInfo()            //Специально взял метол принт, потому что он единственный что-ли может красиво подойти под событие, т.к. все остальные методы откуда-то наследуются, короче бред, а тут удобно
+
+        public override void PrintDelegateMessage(IPerson.ShowMessage method)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void PrintInfo()            //Специально взял метол принт, потому что он единственный что-ли может красиво подойти под событие,
+                                                    //т.к. все остальные методы откуда-то наследуются, короче бред, а тут удобно
         {
             string buffer;        
             buffer = $"Студент {LastName} {Name} " + GetYearInfo() + $". Ростом вышел {Height}. \nПол: " +
@@ -33,7 +39,7 @@ namespace TestSolution.Properties
 
         public delegate void ShowMessage(string message);        //Прототип делегата, его же и использую для анонимного метода
 
-        public void PrintDelegateMessage(ShowMessage method)        //Сам делегат. ShowMessage - Делегат, method - Какой-то метод, который на самом деле является указателем на другой метод
+        public void PrintDelegateMessage(ShowMessage method)        //Сам делегат. ShowMessage - Делегат, method - Какой-то метод, который на самом//деле является указателем на другой метод
         {
             ShowMessage AnOnYmUs2007 = delegate(string message)        //Анонимный метод
             {
@@ -46,6 +52,5 @@ namespace TestSolution.Properties
             
             method("Delegate check - YES");        //ну такой простой делегат, просто чтобы вставить тут находится. Показать работу
         }
-
     }
 }

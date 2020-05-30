@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 
 
-namespace TestSolution.Properties
+namespace TestSolutionn.Properties
 {
     public enum Sex
     {
@@ -18,12 +18,13 @@ namespace TestSolution.Properties
         Sex GetSexInfo();
         bool ArmyOrNot();
 
-        string GetYearInfo();
+        public string GetYearInfo();
         
         public event EventHandler<GetPrintEventArgs> GetPrint;        //Прототип события
         
         public delegate void ShowMessage(string message);        //Прототип делегата
-        public void PrintDelegateMessage(ShowMessage method);  //Прототип функции, которая будет выводить message для десонмтрации работы делегата
+        public void PrintDelegateMessage(ShowMessage method);  //Прототип функции, которая будет выводить
+                                                               //message для десонмтрации работы делегата
         
         
         void PrintInfo();
@@ -72,27 +73,13 @@ namespace TestSolution.Properties
             return sex == Sex.Male && _age < 27 && _age >= 18;
         }
 
-        public string GetYearInfo()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string GetYearInfo();
 
         public event EventHandler<GetPrintEventArgs> GetPrint;
-        public void PrintDelegateMessage(IPerson.ShowMessage method)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void PrintDelegateMessage(IPerson.ShowMessage method);
 
-        public void PrintInfo()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void PrintInfo();
 
-        public string GetFormOfStudyInfo()
-        {
-            throw new NotImplementedException();
-        }
-
-        
+        public abstract string GetFormOfStudyInfo();
     }
 }

@@ -2,9 +2,9 @@
 using System.Net.Mime;
 using System.Text;
 
-namespace TestSolution.Properties
+namespace TestSolutionn.Properties
 {
-    public class Student : Person, IPerson
+    public abstract class Student : Person, IPerson
     {
         private readonly StudentInfo _info;
 
@@ -36,7 +36,7 @@ namespace TestSolution.Properties
             return false;
         }
 
-        protected virtual string GetYearInfo()
+        public override string GetYearInfo()
         {
             if (_info.Year == 0)
             {
@@ -48,7 +48,7 @@ namespace TestSolution.Properties
             return _info.Year == 0 ? " вовсе не студент" :  $"учится на {_info.Year} курсе в {_info.University}"; //- Почему не работает?
         }
 
-        protected string GetFormOfStudyInfo()
+        public override string GetFormOfStudyInfo()
         {
             if (_info.FormOfStudy)
                 return " Платная.";
@@ -56,7 +56,7 @@ namespace TestSolution.Properties
                 return " Бюджетная.";
         }
 
-        public virtual void PrintInfo()
+        public override void PrintInfo()
         {
             Console.WriteLine($"Студент {LastName} {Name} " + GetYearInfo() + $" ростом {Height}. \nПол: {sex}"+ "\nФорма обучения: " + GetFormOfStudyInfo());
         }

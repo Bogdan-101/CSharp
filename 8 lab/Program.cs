@@ -6,7 +6,7 @@ using System.Security.AccessControl;
 using System.Security.Policy;
 using System.Security.Principal;
 using System.Text;
-using TestSolution.Properties;
+using TestSolutionn.Properties;
 
 namespace TestSolution
 {
@@ -57,7 +57,8 @@ namespace TestSolution
             man.GetPrint+= ManOnGetYear;    //Подписываемся на событие
 
             IPerson.ShowMessage method = ShowMessageForDelegate;            //Сделали указатель на метод тот вон длинный
-            man.PrintDelegateMessage(method);            //Посылаем в функцию указатель на ShowMessageForDelegate, в который пошлётся строка message
+            man.PrintDelegateMessage(method);            //Посылаем в функцию указатель на ShowMessageForDelegate,
+                                                         //в который пошлётся строка message
             
             man.PrintInfo();
 
@@ -65,7 +66,8 @@ namespace TestSolution
                 ? $"{lastName} {name} годен к несению воинской службы! Ура!"
                 : $"{lastName} {name} не будет служить в бравых войсках белорусской армии! Какая досада!");
             
-            //Студент, который был создан просто для демонстрации работы IComparable(IComparable как стандартный интерфейс тут выступает)
+            //Студент, который был создан просто для демонстрации работы IComparable
+            //(IComparable как стандартный интерфейс тут выступает)
             IPerson manForIComparable = new SpecialKid(19, 178, "Валера", "Вазектамин", "БГУ", 2, "ФПМИ", false, Sex.Male);
             
             IPerson[] people = new IPerson[] { man, manForIComparable };
@@ -83,7 +85,8 @@ namespace TestSolution
             throw new NotImplementedException();
         }
 
-        public static void ShowMessageForDelegate(string message)                 //Метод, на который делаем указатель method и куда будем послыать message
+        public static void ShowMessageForDelegate(string message)                 //Метод, на который делаем указатель
+                                                                                  //method и куда будем послыать message
         {
             Console.WriteLine(message);
         }

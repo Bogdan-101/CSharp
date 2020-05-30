@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestSolution.Properties
+namespace TestSolutionn.Properties
 {
     public class GetPrintEventArgs : EventArgs            //Класс для передачи параметров
     {
