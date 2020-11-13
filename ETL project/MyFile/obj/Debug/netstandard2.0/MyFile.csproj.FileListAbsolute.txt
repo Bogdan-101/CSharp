@@ -6,4 +6,3 @@ C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\MyFile\obj\Debug\netstandard
 C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\MyFile\obj\Debug\netstandard2.0\MyFile.AssemblyInfo.cs
 C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\MyFile\obj\Debug\netstandard2.0\MyFile.dll
 C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\MyFile\obj\Debug\netstandard2.0\MyFile.pdb
-C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\MyFile\obj\Debug\netstandard2.0\MyFile.csprojAssemblyReference.cache

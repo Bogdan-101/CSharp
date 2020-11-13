@@ -18,6 +18,13 @@ namespace ETL
             this.AutoLog = true;
         }
 
+        internal void TestConsole(string[] args)
+        {
+            this.OnStart(args);
+            Console.ReadLine();
+            this.OnStop();
+        }
+
         protected override void OnStart(string[] args)
         {
             logger = new Logger();
@@ -40,10 +47,7 @@ namespace ETL
             public Logger()
             {
                 watcher = new FileSystemWatcher(@"C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\SourceDirectory\");
-                watcher.Deleted += Watcher_Deleted;
                 watcher.Created += Watcher_Created;
-                watcher.Changed += Watcher_Changed;
-                watcher.Renamed += Watcher_Renamed;
             }
 
             public void Start()
@@ -58,20 +62,6 @@ namespace ETL
             {
                 watcher.EnableRaisingEvents = false;
                 enabled = false;
-            }
-            // переименование файлов
-            private void Watcher_Renamed(object sender, RenamedEventArgs e)
-            {
-                string fileEvent = "переименован в " + e.FullPath;
-                string filePath = e.OldFullPath;
-                RecordEntry(fileEvent, filePath);
-            }
-            // изменение файлов
-            private void Watcher_Changed(object sender, FileSystemEventArgs e)
-            {
-                string fileEvent = "изменен";
-                string filePath = e.FullPath;
-                RecordEntry(fileEvent, filePath);
             }
             // создание файлов
             private void Watcher_Created(object sender, FileSystemEventArgs e)
@@ -101,14 +91,6 @@ namespace ETL
 
                 RecordEntry(fileEvent, fileName);
             }
-            // удаление файлов
-            private void Watcher_Deleted(object sender, FileSystemEventArgs e)
-            {
-                string fileEvent = "удален";
-                string filePath = e.FullPath;
-                RecordEntry(fileEvent, filePath);
-            }
-
             private void RecordEntry(string fileEvent, string filePath)
             {
                 lock (obj)
