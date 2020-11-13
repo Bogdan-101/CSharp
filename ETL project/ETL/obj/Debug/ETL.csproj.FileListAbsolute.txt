@@ -1,0 +1,10 @@
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.csprojAssemblyReference.cache
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe.config
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.pdb
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.exe
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.pdb
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\MyFile.dll
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\MyFile.pdb
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.csproj.CopyComplete
