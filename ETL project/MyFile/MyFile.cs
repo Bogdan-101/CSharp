@@ -28,10 +28,9 @@ namespace FileOperations
             DirectoryDestinationNotExist,
             DirectorySourceNotExist,
         }
-        public static void CompressAndMove(string fileName, string filePath)
+        public static void CompressAndMove(string fileName, string filePath, string TargetPath, string extension)
         {
             //moving part
-            string TargetPath = @"C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\TargetDirectory\";
 
             string year = fileName.Substring(6, 4),
                 month = fileName.Substring(11, 2),
@@ -56,7 +55,7 @@ namespace FileOperations
 
             TargetPath += fileName;
 
-            TargetPath = TargetPath.Replace(".txt", ".gz");
+            TargetPath = TargetPath.Replace(".txt", extension);
 
             CompressFile(filePath, TargetPath);
         }
@@ -96,10 +95,10 @@ namespace FileOperations
             else
                 return "error";
         }
-        public static void DecompressFileToTargetDir(string fileName, string filePath)
+        public static void DecompressFileToTargetDir(string fileName, string filePath, string extension)
         {
             /* fileName is file.txt We need to change it to file.gz, because it is comressed in archieve */
-            string gzFileName = fileName.Replace(".txt", ".gz");
+            string gzFileName = fileName.Replace(".txt", extension);
 
             /* now we need to decompress archieve. But before this, we need to get path to archieve, that has .gz format in TargetDirectory */
             string targetPathOfFileDir = GetPathOfFileInTargetDir(gzFileName);
@@ -153,9 +152,8 @@ namespace FileOperations
             }
         }
 
-        public static void EncryptFile(string fileName, string filePath)
+        public static void EncryptFile(string fileName, string filePath, string key)
         {
-            var key = "b14ca5898a4e4133bbce2ea2315a1916";
             string data;
             string encryptedData;
 
@@ -171,9 +169,8 @@ namespace FileOperations
             }
         }
 
-        public static void DecryptFile(string fileName, string filePath)
+        public static void DecryptFile(string fileName, string filePath, string key)
         {
-            var key = "b14ca5898a4e4133bbce2ea2315a1916";
             string data;
             string decryptedData;
 

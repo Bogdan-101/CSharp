@@ -4,10 +4,19 @@ using System.IO;
 using System.Threading;
 using System.Text.RegularExpressions;
 using FileOperations;
+using Newtonsoft.Json.Linq;
 
 namespace ETL
 {
-    public partial class Service1 : ServiceBase
+    public class obj
+    {
+        public string sourceDirectory { get; set; }
+        public string targetPath { get; set; }
+        public string regex { get; set; }
+        public string extension { get; set; }
+        public string key { get; set; }
+    }
+public partial class Service1 : ServiceBase
     {
         Logger logger;
         public Service1()
@@ -41,12 +50,15 @@ namespace ETL
         class Logger
         {
             FileSystemWatcher watcher;
+            obj ob;
             object obj = new object();
             bool enabled = true;
 
             public Logger()
             {
-                watcher = new FileSystemWatcher(@"C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\SourceDirectory\");
+                JObject data = JObject.Parse(File.ReadAllText(@"C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\appsettings.json"));
+                ob = data.ToObject<obj>();
+                watcher = new FileSystemWatcher(ob.sourceDirectory);
                 watcher.Created += Watcher_Created;
             }
 
@@ -70,23 +82,24 @@ namespace ETL
 
                 string fileName = e.Name;
                 string filePath = e.FullPath;
+                Console.WriteLine(fileName);
 
                 string fileEvent = "создан";
-                Regex regex = new Regex(@"Sales_[0-9]{4}_((0[1-9])|(1[0-2]))_((0[1-9])|(1[0-9])|(2[0-9])|(3[0-1]))_((0[0-9])|(1[0-9])|(2[0-3]))_[0-5][0-9]_[0-5][0-9].txt");
+                Regex regex = new Regex(ob.regex);
 
                 if (regex.IsMatch(fileName))
                 {
                     RecordEntry("вошли", fileName);
-                    MyFile.EncryptFile(fileName, filePath);
+                    MyFile.EncryptFile(fileName, filePath, ob.key);
 
-                    MyFile.CompressAndMove(fileName, filePath);
+                    MyFile.CompressAndMove(fileName, filePath, ob.targetPath, ob.extension);
 
-                    MyFile.DecompressFileToTargetDir(fileName, filePath);
+                    MyFile.DecompressFileToTargetDir(fileName, filePath, ob.extension);
 
                     string newPath = MyFile.GetPathOfFileInTargetDir(fileName);
                     newPath += fileName;
 
-                    MyFile.DecryptFile(fileName, newPath);
+                    MyFile.DecryptFile(fileName, newPath, ob.key);
                 }
 
                 RecordEntry(fileEvent, fileName);
