@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Text.RegularExpressions;
 using FileOperations;
-using Newtonsoft.Json.Linq;
+using Datamanager;
 
 namespace ETL
 {
@@ -50,15 +50,13 @@ public partial class Service1 : ServiceBase
         class Logger
         {
             FileSystemWatcher watcher;
-            obj ob;
+            Parse parsedOptions = new Parse();
             object obj = new object();
             bool enabled = true;
 
             public Logger()
             {
-                JObject data = JObject.Parse(File.ReadAllText(@"C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\appsettings.json"));
-                ob = data.ToObject<obj>();
-                watcher = new FileSystemWatcher(ob.sourceDirectory);
+                watcher = new FileSystemWatcher(parsedOptions.options.PathsOptions.SourceDirectory);
                 watcher.Created += Watcher_Created;
             }
 
@@ -85,21 +83,21 @@ public partial class Service1 : ServiceBase
                 Console.WriteLine(fileName);
 
                 string fileEvent = "создан";
-                Regex regex = new Regex(ob.regex);
+                Regex regex = new Regex(parsedOptions.options.PathsOptions.Regex);
 
                 if (regex.IsMatch(fileName))
                 {
                     RecordEntry("вошли", fileName);
-                    MyFile.EncryptFile(fileName, filePath, ob.key);
+                    MyFile.EncryptFile(fileName, filePath, parsedOptions.options.EncryptingOptions.Key);
 
-                    MyFile.CompressAndMove(fileName, filePath, ob.targetPath, ob.extension);
+                    MyFile.CompressAndMove(fileName, filePath, parsedOptions.options.PathsOptions.TargetPath, parsedOptions.options.CompressOptions.Extension);
 
-                    MyFile.DecompressFileToTargetDir(fileName, filePath, ob.extension);
+                    MyFile.DecompressFileToTargetDir(fileName, filePath, parsedOptions.options.CompressOptions.Extension);
 
                     string newPath = MyFile.GetPathOfFileInTargetDir(fileName);
                     newPath += fileName;
 
-                    MyFile.DecryptFile(fileName, newPath, ob.key);
+                    MyFile.DecryptFile(fileName, newPath, parsedOptions.options.EncryptingOptions.Key);
                 }
 
                 RecordEntry(fileEvent, fileName);

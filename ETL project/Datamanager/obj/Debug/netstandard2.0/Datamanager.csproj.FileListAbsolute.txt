@@ -1,0 +1,9 @@
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\bin\Debug\netstandard2.0\Datamanager.deps.json
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\bin\Debug\netstandard2.0\Datamanager.dll
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\obj\Debug\netstandard2.0\Datamanager.csprojAssemblyReference.cache
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\obj\Debug\netstandard2.0\Datamanager.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\obj\Debug\netstandard2.0\Datamanager.AssemblyInfo.cs
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\bin\Debug\netstandard2.0\Datamanager.pdb
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\obj\Debug\netstandard2.0\Datamanager.dll
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\obj\Debug\netstandard2.0\Datamanager.pdb
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\Datamanager\obj\Debug\netstandard2.0\Datamanager.csproj.CoreCompileInputs.cache

@@ -24,3 +24,55 @@
    logtoconsole = 
    logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
    assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Выполняется установка сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Устанавливается служба Service1...
+Создается исходный EventLog Service1 в журнале Application...
+Выполняется откат для сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Восстанавливается исходное состояние журнала событий для источника Service1.
+Выполняется установка сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Устанавливается служба Service1...
+Служба Service1 успешно установлена.
+Создается исходный EventLog Service1 в журнале Application...
+Выполняется фиксация сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Выполняется установка сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Устанавливается служба Service1...
+Служба Service1 успешно установлена.
+Создается исходный EventLog Service1 в журнале Application...
+Выполняется фиксация сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Выполняется установка сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe
+Устанавливается служба Service1...
+Служба Service1 успешно установлена.
+Создается исходный EventLog Service1 в журнале Application...
+Выполняется фиксация сборки 'c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.InstallLog
+   assemblypath = c:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\ETL.exe

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETL", "ETL.csproj", "{0E5B8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFile", "..\MyFile\MyFile.csproj", "{7A003C8B-B218-4CEA-B568-D62F0963E3F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datamanager", "..\Datamanager\Datamanager.csproj", "{F218AE3E-BB67-4869-B715-E80163AE1FCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7A003C8B-B218-4CEA-B568-D62F0963E3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A003C8B-B218-4CEA-B568-D62F0963E3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A003C8B-B218-4CEA-B568-D62F0963E3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F218AE3E-BB67-4869-B715-E80163AE1FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F218AE3E-BB67-4869-B715-E80163AE1FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F218AE3E-BB67-4869-B715-E80163AE1FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F218AE3E-BB67-4869-B715-E80163AE1FCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
