@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETL", "ETL.csproj", "{0E5B8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFile", "..\MyFile\MyFile.csproj", "{7A003C8B-B218-4CEA-B568-D62F0963E3F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datamanager", "..\Datamanager\Datamanager.csproj", "{F218AE3E-BB67-4869-B715-E80163AE1FCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datamanager", "..\Datamanager\Datamanager.csproj", "{F218AE3E-BB67-4869-B715-E80163AE1FCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "..\DataAccessLayer\DataAccessLayer.csproj", "{16D2C4CF-5B9C-4498-AC9F-BE568AF8A458}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models.csproj", "{98A4242C-B4BF-4044-B58F-F5775C95D8BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "..\ServiceLayer\ServiceLayer.csproj", "{DD34321B-C28E-4CF8-9F15-BC4076789AC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{F218AE3E-BB67-4869-B715-E80163AE1FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F218AE3E-BB67-4869-B715-E80163AE1FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F218AE3E-BB67-4869-B715-E80163AE1FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16D2C4CF-5B9C-4498-AC9F-BE568AF8A458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D2C4CF-5B9C-4498-AC9F-BE568AF8A458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D2C4CF-5B9C-4498-AC9F-BE568AF8A458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D2C4CF-5B9C-4498-AC9F-BE568AF8A458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98A4242C-B4BF-4044-B58F-F5775C95D8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98A4242C-B4BF-4044-B58F-F5775C95D8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98A4242C-B4BF-4044-B58F-F5775C95D8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98A4242C-B4BF-4044-B58F-F5775C95D8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD34321B-C28E-4CF8-9F15-BC4076789AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD34321B-C28E-4CF8-9F15-BC4076789AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD34321B-C28E-4CF8-9F15-BC4076789AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD34321B-C28E-4CF8-9F15-BC4076789AC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

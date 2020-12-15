@@ -5,6 +5,11 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using FileOperations;
 using Datamanager;
+using System.Configuration;
+using System.Data.SqlClient;
+using DataAccessLayer;
+using ServiceLayer;
+using Models;
 
 namespace ETL
 {
@@ -37,6 +42,7 @@ public partial class Service1 : ServiceBase
         protected override void OnStart(string[] args)
         {
             logger = new Logger();
+            logger.StartServices();
             Thread loggerThread = new Thread(new ThreadStart(logger.Start));
             loggerThread.Start();
         }
@@ -72,6 +78,53 @@ public partial class Service1 : ServiceBase
             {
                 watcher.EnableRaisingEvents = false;
                 enabled = false;
+            }
+            public void StartServices()
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                string sqlExpression = "SELECT TOP 10 [OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [ShipVia], [Freight], [ShipName], [ShipAddress] ,[ShipCity], [ShipRegion], [ShipPostalCode], [ShipCountry] FROM[NORTHWND].[dbo].[Orders]";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    var reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        Console.WriteLine("{0}\t{1}\t{2}", reader.GetName(0), reader.GetName(1), reader.GetName(2));
+
+                        while (reader.Read())
+                        {
+                            var order = new Order();
+                            order.OrderId = reader.GetInt32(0);
+                            order.customer = reader.GetString(1);
+                            order.shipName = reader.GetString(8);
+                            order.shipAddress = reader.GetString(9);
+                            order.shipCity = reader.GetString(10);
+                            order.shipCountry = reader.GetString(13);
+                            order.shippedDate = reader.GetDateTime(5);
+                            Console.WriteLine("{0} \t{1} \t{2}", order.OrderId, order.customer, order.shippedDate);
+                        }
+                    }
+                    reader.Close();
+                }
+                try
+                {
+                    var repositories = new UnitOfWork(connectionString);
+                    OrderService orderService = new OrderService(repositories);
+                    var ordersInfo = orderService.GetListOfOrders();
+                    Console.WriteLine("succ");
+
+                    XmlGenerator<Order> orders = new XmlGenerator<Order>(AppDomain.CurrentDomain.BaseDirectory + "Orders.xml");
+                    orders.XmlGenerate(ordersInfo);
+                }
+                catch (Exception trouble)
+                {
+                    var repositories2 = new UnitOfWork(connectionString);
+                    ErrorService service = new ErrorService(repositories2);
+                    service.AddErrors(new Error(trouble.GetType().Name, trouble.Message, DateTime.Now));
+                }
             }
             // создание файлов
             private void Watcher_Created(object sender, FileSystemEventArgs e)

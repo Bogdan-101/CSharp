@@ -43,6 +43,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -83,9 +84,7 @@
     <Compile Include="Installer1.Designer.cs">
       <DependentUpon>Installer1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Service1.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Service1.cs" />
     <Compile Include="Service1.Designer.cs">
       <DependentUpon>Service1.cs</DependentUpon>
     </Compile>
@@ -97,13 +96,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{16D2C4CF-5B9C-4498-AC9F-BE568AF8A458}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Datamanager\Datamanager.csproj">
       <Project>{f218ae3e-bb67-4869-b715-e80163ae1fce}</Project>
       <Name>Datamanager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{98A4242C-B4BF-4044-B58F-F5775C95D8BB}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyFile\MyFile.csproj">
       <Project>{7a003c8b-b218-4cea-b568-d62f0963e3f7}</Project>
       <Name>MyFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
+      <Project>{DD34321B-C28E-4CF8-9F15-BC4076789AC3}</Project>
+      <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
