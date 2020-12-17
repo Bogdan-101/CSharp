@@ -12,13 +12,10 @@ namespace ServiceLayer
         public OrderService(IUnitOfWork unitOfWork)
         {
             Database = unitOfWork;
-
-            Console.WriteLine("succ3");
         }
 
         public IEnumerable<Order> GetListOfOrders()
         {
-            Console.WriteLine("succ1");
             return Database.Orders.GetAll();
         }
 

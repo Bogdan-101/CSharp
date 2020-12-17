@@ -46,6 +46,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -97,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{16D2C4CF-5B9C-4498-AC9F-BE568AF8A458}</Project>
+      <Project>{16d2c4cf-5b9c-4498-ac9f-be568af8a458}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Datamanager\Datamanager.csproj">
@@ -105,7 +108,7 @@
       <Name>Datamanager</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{98A4242C-B4BF-4044-B58F-F5775C95D8BB}</Project>
+      <Project>{98a4242c-b4bf-4044-b58f-f5775c95d8bb}</Project>
       <Name>Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyFile\MyFile.csproj">
@@ -113,7 +116,7 @@
       <Name>MyFile</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
-      <Project>{DD34321B-C28E-4CF8-9F15-BC4076789AC3}</Project>
+      <Project>{dd34321b-c28e-4cf8-9f15-bc4076789ac3}</Project>
       <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>

@@ -72,7 +72,6 @@ namespace DataAccessLayer
 
         public IEnumerable<Order> GetAll()
         {
-            Console.WriteLine("succ2");
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -96,7 +95,7 @@ namespace DataAccessLayer
 
                     if (reader.HasRows)
                     {
-                        while (reader.Read() && orders.Count < 5)
+                        while (reader.Read())
                         {
                             var order = new Order();
                             order.OrderId = reader.GetInt32(0);

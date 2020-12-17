@@ -34,3 +34,5 @@ C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\System.ValueTu
 C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.csproj.CopyComplete
 C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.exe
 C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\obj\Debug\ETL.pdb
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Lenovo\Documents\GitHub\CSharp\ETL project\ETL\bin\Debug\System.Data.SqlClient.xml

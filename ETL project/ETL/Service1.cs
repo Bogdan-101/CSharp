@@ -82,41 +82,13 @@ public partial class Service1 : ServiceBase
             public void StartServices()
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                string sqlExpression = "SELECT TOP 10 [OrderID], [CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [ShipVia], [Freight], [ShipName], [ShipAddress] ,[ShipCity], [ShipRegion], [ShipPostalCode], [ShipCountry] FROM[NORTHWND].[dbo].[Orders]";
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExpression, connection);
-                    var reader = command.ExecuteReader();
-
-                    if (reader.HasRows)
-                    {
-                        Console.WriteLine("{0}\t{1}\t{2}", reader.GetName(0), reader.GetName(1), reader.GetName(2));
-
-                        while (reader.Read())
-                        {
-                            var order = new Order();
-                            order.OrderId = reader.GetInt32(0);
-                            order.customer = reader.GetString(1);
-                            order.shipName = reader.GetString(8);
-                            order.shipAddress = reader.GetString(9);
-                            order.shipCity = reader.GetString(10);
-                            order.shipCountry = reader.GetString(13);
-                            order.shippedDate = reader.GetDateTime(5);
-                            Console.WriteLine("{0} \t{1} \t{2}", order.OrderId, order.customer, order.shippedDate);
-                        }
-                    }
-                    reader.Close();
-                }
                 try
                 {
                     var repositories = new UnitOfWork(connectionString);
                     OrderService orderService = new OrderService(repositories);
                     var ordersInfo = orderService.GetListOfOrders();
-                    Console.WriteLine("succ");
 
-                    XmlGenerator<Order> orders = new XmlGenerator<Order>(AppDomain.CurrentDomain.BaseDirectory + "Orders.xml");
+                    XmlGenerator<Order> orders = new XmlGenerator<Order>(AppDomain.CurrentDomain.BaseDirectory.Substring(0, AppDomain.CurrentDomain.BaseDirectory.Length - 14) + "Orders.xml");
                     orders.XmlGenerate(ordersInfo);
                 }
                 catch (Exception trouble)

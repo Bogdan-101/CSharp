@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <OrderId>10248</OrderId>
+    <customer>VINET</customer>
+    <shipName>Vins et alcools Chevalier</shipName>
+    <shipAddress>59 rue de l'Abbaye</shipAddress>
+    <shipCity>Reims</shipCity>
+    <shipCountry>France</shipCountry>
+    <shippedDate>1996-07-16T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10249</OrderId>
+    <customer>TOMSP</customer>
+    <shipName>Toms Spezialitäten</shipName>
+    <shipAddress>Luisenstr. 48</shipAddress>
+    <shipCity>Münster</shipCity>
+    <shipCountry>Germany</shipCountry>
+    <shippedDate>1996-07-10T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10250</OrderId>
+    <customer>HANAR</customer>
+    <shipName>Hanari Carnes</shipName>
+    <shipAddress>Rua do Paço, 67</shipAddress>
+    <shipCity>Rio de Janeiro</shipCity>
+    <shipCountry>Brazil</shipCountry>
+    <shippedDate>1996-07-12T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10251</OrderId>
+    <customer>VICTE</customer>
+    <shipName>Victuailles en stock</shipName>
+    <shipAddress>2, rue du Commerce</shipAddress>
+    <shipCity>Lyon</shipCity>
+    <shipCountry>France</shipCountry>
+    <shippedDate>1996-07-15T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10252</OrderId>
+    <customer>SUPRD</customer>
+    <shipName>Suprêmes délices</shipName>
+    <shipAddress>Boulevard Tirou, 255</shipAddress>
+    <shipCity>Charleroi</shipCity>
+    <shipCountry>Belgium</shipCountry>
+    <shippedDate>1996-07-11T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10253</OrderId>
+    <customer>HANAR</customer>
+    <shipName>Hanari Carnes</shipName>
+    <shipAddress>Rua do Paço, 67</shipAddress>
+    <shipCity>Rio de Janeiro</shipCity>
+    <shipCountry>Brazil</shipCountry>
+    <shippedDate>1996-07-16T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10254</OrderId>
+    <customer>CHOPS</customer>
+    <shipName>Chop-suey Chinese</shipName>
+    <shipAddress>Hauptstr. 31</shipAddress>
+    <shipCity>Bern</shipCity>
+    <shipCountry>Switzerland</shipCountry>
+    <shippedDate>1996-07-23T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10255</OrderId>
+    <customer>RICSU</customer>
+    <shipName>Richter Supermarkt</shipName>
+    <shipAddress>Starenweg 5</shipAddress>
+    <shipCity>Genève</shipCity>
+    <shipCountry>Switzerland</shipCountry>
+    <shippedDate>1996-07-15T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10256</OrderId>
+    <customer>WELLI</customer>
+    <shipName>Wellington Importadora</shipName>
+    <shipAddress>Rua do Mercado, 12</shipAddress>
+    <shipCity>Resende</shipCity>
+    <shipCountry>Brazil</shipCountry>
+    <shippedDate>1996-07-17T00:00:00</shippedDate>
+  </Order>
+  <Order>
+    <OrderId>10257</OrderId>
+    <customer>HILAA</customer>
+    <shipName>HILARION-Abastos</shipName>
+    <shipAddress>Carrera 22 con Ave. Carlos Soublette #8-35</shipAddress>
+    <shipCity>San Cristóbal</shipCity>
+    <shipCountry>Venezuela</shipCountry>
+    <shippedDate>1996-07-22T00:00:00</shippedDate>
+  </Order>
+</ArrayOfOrder>
