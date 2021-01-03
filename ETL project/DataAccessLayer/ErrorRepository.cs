@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Models;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -54,12 +55,12 @@ namespace DataAccessLayer
             throw new NotImplementedException();
         }
 
-        public Error Get(int id)
+        public Task<Error> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Error> GetAll()
+        public Task<IEnumerable<Error>> GetAll()
         {
             throw new NotImplementedException();
         }

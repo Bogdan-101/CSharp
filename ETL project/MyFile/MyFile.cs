@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FileOperations
 {
@@ -28,36 +29,39 @@ namespace FileOperations
             DirectoryDestinationNotExist,
             DirectorySourceNotExist,
         }
-        public static void CompressAndMove(string fileName, string filePath, string TargetPath, string extension)
+        public static async Task CompressAndMove(string fileName, string filePath, string TargetPath, string extension)
         {
-            //moving part
-
-            string year = fileName.Substring(6, 4),
-                month = fileName.Substring(11, 2),
-                day = fileName.Substring(14, 2),
-                hour = fileName.Substring(17, 2),
-                minute = fileName.Substring(20, 2),
-                second = fileName.Substring(23, 2);
-
-            string[] info = { year, month, day, hour, minute, second };
-
-            foreach (string part in info)
+            await Task.Run(() =>
             {
-                TargetPath += part;
+                //moving part
 
-                DirectoryInfo dirInfo = new DirectoryInfo(TargetPath);
+                string year = fileName.Substring(6, 4),
+                    month = fileName.Substring(11, 2),
+                    day = fileName.Substring(14, 2),
+                    hour = fileName.Substring(17, 2),
+                    minute = fileName.Substring(20, 2),
+                    second = fileName.Substring(23, 2);
 
-                if (!dirInfo.Exists)
-                    dirInfo.Create();
+                string[] info = { year, month, day, hour, minute, second };
 
-                TargetPath += @"\";
-            }
+                foreach (string part in info)
+                {
+                    TargetPath += part;
 
-            TargetPath += fileName;
+                    DirectoryInfo dirInfo = new DirectoryInfo(TargetPath);
 
-            TargetPath = TargetPath.Replace(".txt", extension);
+                    if (!dirInfo.Exists)
+                        dirInfo.Create();
 
-            CompressFile(filePath, TargetPath);
+                    TargetPath += @"\";
+                }
+
+                TargetPath += fileName;
+
+                TargetPath = TargetPath.Replace(".txt", extension);
+
+                CompressFile(filePath, TargetPath);
+            });
         }
 
         public static string GetPathOfFileInTargetDir(string fileName)
@@ -95,20 +99,23 @@ namespace FileOperations
             else
                 return "error";
         }
-        public static void DecompressFileToTargetDir(string fileName, string filePath, string extension)
+        public static async Task DecompressFileToTargetDir(string fileName, string filePath, string extension)
         {
-            /* fileName is file.txt We need to change it to file.gz, because it is comressed in archieve */
-            string gzFileName = fileName.Replace(".txt", extension);
+            await Task.Run(() =>
+            {
+                /* fileName is file.txt We need to change it to file.gz, because it is comressed in archieve */
+                string gzFileName = fileName.Replace(".txt", extension);
 
-            /* now we need to decompress archieve. But before this, we need to get path to archieve, that has .gz format in TargetDirectory */
-            string targetPathOfFileDir = GetPathOfFileInTargetDir(gzFileName);
-            string compressedFile = targetPathOfFileDir;
-            compressedFile += gzFileName;
+                /* now we need to decompress archieve. But before this, we need to get path to archieve, that has .gz format in TargetDirectory */
+                string targetPathOfFileDir = GetPathOfFileInTargetDir(gzFileName);
+                string compressedFile = targetPathOfFileDir;
+                compressedFile += gzFileName;
 
-            string decompressedFile = targetPathOfFileDir;
-            decompressedFile += fileName;
-            Console.WriteLine("starting decompressing\ncompressed file: " + compressedFile);
-            DecompressFile(compressedFile, decompressedFile);
+                string decompressedFile = targetPathOfFileDir;
+                decompressedFile += fileName;
+                Console.WriteLine("starting decompressing\ncompressed file: " + compressedFile);
+                DecompressFile(compressedFile, decompressedFile);
+            });
         }
 
         public static StatusCode CompressFile(string sourceFile, string compressedFile)
@@ -152,38 +159,44 @@ namespace FileOperations
             }
         }
 
-        public static void EncryptFile(string fileName, string filePath, string key)
+        public static async Task EncryptFile(string fileName, string filePath, string key)
         {
-            string data;
-            string encryptedData;
-
-            using (StreamReader reader = new StreamReader(filePath))
+            await Task.Run(() =>
             {
-                data = reader.ReadToEnd();
-                encryptedData = EncryptString(key, data);
-            }
+                string data;
+                string encryptedData;
 
-            using (StreamWriter writer = new StreamWriter(filePath, false))
-            {
-                writer.WriteLine(encryptedData);
-            }
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    data = reader.ReadToEnd();
+                    encryptedData = EncryptString(key, data);
+                }
+
+                using (StreamWriter writer = new StreamWriter(filePath, false))
+                {
+                    writer.WriteLine(encryptedData);
+                }
+            });
         }
 
-        public static void DecryptFile(string fileName, string filePath, string key)
+        public static async Task DecryptFile(string fileName, string filePath, string key)
         {
-            string data;
-            string decryptedData;
-
-            using (StreamReader reader = new StreamReader(filePath))
+            await Task.Run(() =>
             {
-                data = reader.ReadToEnd();
-                decryptedData = DecryptString(key, data);
-            }
+                string data;
+                string decryptedData;
 
-            using (StreamWriter writer = new StreamWriter(filePath, false))
-            {
-                writer.WriteLine(decryptedData);
-            }
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    data = reader.ReadToEnd();
+                    decryptedData = DecryptString(key, data);
+                }
+
+                using (StreamWriter writer = new StreamWriter(filePath, false))
+                {
+                    writer.WriteLine(decryptedData);
+                }
+            });
         }
 
         public static string EncryptString(string key, string plainText)

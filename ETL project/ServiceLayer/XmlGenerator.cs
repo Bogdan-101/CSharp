@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
@@ -15,24 +16,26 @@ namespace ServiceLayer
             pathToXml = path;
         }
 
-        public void XmlGenerate<T>(IEnumerable<T> info)
+        public async Task XmlGenerate<T>(IEnumerable<T> info)
         {
-            try
+            await Task.Run(() =>
             {
-                List<T> emp = new List<T>(info);
-
-                XmlSerializer formatter = new XmlSerializer(typeof(List<T>));
-
-                using (FileStream fs = new FileStream(pathToXml, FileMode.OpenOrCreate))
+                try
                 {
-                    formatter.Serialize(fs, emp);
-                }
-            }
-            catch (Exception trouble)
-            {
-                throw trouble;
-            }
+                    List<T> emp = new List<T>(info);
 
+                    XmlSerializer formatter = new XmlSerializer(typeof(List<T>));
+
+                    using (FileStream fs = new FileStream(pathToXml, FileMode.OpenOrCreate))
+                    {
+                        formatter.Serialize(fs, emp);
+                    }
+                }
+                catch (Exception trouble)
+                {
+                    throw trouble;
+                }
+            });
         }
     }
 }

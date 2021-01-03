@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Models;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -29,95 +30,102 @@ namespace DataAccessLayer
             throw new NotImplementedException();
         }
 
-        public Order Get(int id)
+        public async Task<Order> Get(int id)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            return await Task.Run(() =>
             {
-                connection.Open();
 
-                try
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    var command = new SqlCommand("sp_GetNOrders", connection)
-                    {
-                        CommandType = System.Data.CommandType.StoredProcedure
-                    };
+                    connection.Open();
 
-                    var reader = command.ExecuteReader();
-                    var order = new Order();
-
-                    if (reader.HasRows)
+                    try
                     {
-                        while (reader.Read())
+                        var command = new SqlCommand("sp_GetNOrders", connection)
                         {
-                            order.OrderId = reader.GetInt32(0);
-                            order.customer = reader.GetString(1);
-                            order.shipName = reader.GetString(8);
-                            order.shipAddress = reader.GetString(9);
-                            order.shipCity = reader.GetString(10);
-                            order.shipCountry = reader.GetString(13);
-                            order.shippedDate = reader.GetDateTime(5);
-                        }
-                    }
-                    reader.Close();
+                            CommandType = System.Data.CommandType.StoredProcedure
+                        };
 
-                    return order;
+                        var reader = command.ExecuteReader();
+                        var order = new Order();
+
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                order.OrderId = reader.GetInt32(0);
+                                order.customer = reader.GetString(1);
+                                order.shipName = reader.GetString(8);
+                                order.shipAddress = reader.GetString(9);
+                                order.shipCity = reader.GetString(10);
+                                order.shipCountry = reader.GetString(13);
+                                order.shippedDate = reader.GetDateTime(5);
+                            }
+                        }
+                        reader.Close();
+
+                        return order;
+                    }
+                    catch (Exception trouble)
+                    {
+                        throw trouble;
+                    }
                 }
-                catch (Exception trouble)
-                {
-                    throw trouble;
-                }
-            }
+            });
         }
 
 
-        public IEnumerable<Order> GetAll()
+        public async Task<IEnumerable<Order>> GetAll()
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            return await Task.Run(() =>
             {
-                connection.Open();
-                var orders = new List<Order>();
-
-                try
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    var command = new SqlCommand("sp_GetNOrders", connection)
-                    {
-                        CommandType = System.Data.CommandType.StoredProcedure
-                    };
+                    connection.Open();
+                    var orders = new List<Order>();
 
-                    SqlParameter countParam = new SqlParameter
+                    try
                     {
-                        ParameterName = "@count",
-                        Value = 10
-                    };
-                    command.Parameters.Add(countParam);
-
-                    var reader = command.ExecuteReader();
-
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
+                        var command = new SqlCommand("sp_GetNOrders", connection)
                         {
-                            var order = new Order();
-                            order.OrderId = reader.GetInt32(0);
-                            order.customer = reader.GetString(1);
-                            order.shipName = reader.GetString(8);
-                            order.shipAddress = reader.GetString(9);
-                            order.shipCity = reader.GetString(10);
-                            order.shipCountry = reader.GetString(13);
-                            order.shippedDate = reader.GetDateTime(5);
+                            CommandType = System.Data.CommandType.StoredProcedure
+                        };
 
-                            orders.Add(order);
+                        SqlParameter countParam = new SqlParameter
+                        {
+                            ParameterName = "@count",
+                            Value = 10
+                        };
+                        command.Parameters.Add(countParam);
+
+                        var reader = command.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                var order = new Order();
+                                order.OrderId = reader.GetInt32(0);
+                                order.customer = reader.GetString(1);
+                                order.shipName = reader.GetString(8);
+                                order.shipAddress = reader.GetString(9);
+                                order.shipCity = reader.GetString(10);
+                                order.shipCountry = reader.GetString(13);
+                                order.shippedDate = reader.GetDateTime(5);
+
+                                orders.Add(order);
+                            }
                         }
-                    }
-                    reader.Close();
+                        reader.Close();
 
-                    return orders;
+                        return orders;
+                    }
+                    catch (Exception trouble)
+                    {
+                        throw trouble;
+                    }
                 }
-                catch (Exception trouble)
-                {
-                    throw trouble;
-                }
-            }
+            });
         }
     }
 }

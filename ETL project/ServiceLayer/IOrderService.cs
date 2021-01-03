@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Models;
 
 namespace ServiceLayer
 {
     interface IOrderService
     {
-        Order GetInfo(int? id);
+        Task<IEnumerable<Order>> GetOrders();
     }
 }

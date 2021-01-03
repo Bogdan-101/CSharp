@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DataAccessLayer;
 using Models;
+using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
@@ -14,20 +15,18 @@ namespace ServiceLayer
             Database = unitOfWork;
         }
 
-        public IEnumerable<Order> GetListOfOrders()
+        public async Task<IEnumerable<Order>> GetListOfOrders()
         {
-            return Database.Orders.GetAll();
+            return await Database.Orders.GetAll();
         }
 
-        public Order GetInfo(int? id)
+        public async Task<IEnumerable<Order>> GetOrders()
         {
-            if (id == null)
-                throw new ValidationException("Не установлено id работника", "");
-            var employee = Database.Orders.Get(id.Value);
-            if (employee == null)
-                throw new ValidationException("Работника не найден", "");
-
-            return employee;
+            return await Task.Run(async () =>
+            {
+                var orders = await GetListOfOrders();
+                return orders;
+            });
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using DataAccessLayer;
 using ServiceLayer;
 using Models;
+using System.Threading.Tasks;
 
 namespace ETL
 {
@@ -41,10 +42,33 @@ public partial class Service1 : ServiceBase
 
         protected override void OnStart(string[] args)
         {
-            logger = new Logger();
-            logger.StartServices();
-            Thread loggerThread = new Thread(new ThreadStart(logger.Start));
-            loggerThread.Start();
+            ThreadPool.QueueUserWorkItem(async state =>
+            {
+                logger = new Logger();
+                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                try
+                {
+                    var repositories = new UnitOfWork(connectionString);
+                    OrderService orderService = new OrderService(repositories);
+                    var ordersInfo = await orderService.GetOrders();
+
+                    //making proper file name
+                    DateTime now = DateTime.Now;
+                    var currTime = now.ToString("yyyy_MM_dd_HH_mm_ss");
+
+                    XmlGenerator<Order> orders = new XmlGenerator<Order>(logger.parsedOptions.options.PathsOptions.SourceDirectory + "Sales_" + currTime + ".txt");
+                    await orders.XmlGenerate(ordersInfo);
+                    this.OnStop();
+                }
+                catch (Exception trouble)
+                {
+                    var repositories2 = new UnitOfWork(connectionString);
+                    ErrorService service = new ErrorService(repositories2);
+                    service.AddErrors(new Error(trouble.GetType().Name, trouble.Message, DateTime.Now));
+                }
+                Thread loggerThread = new Thread(new ThreadStart(logger.Start));
+                loggerThread.Start();
+            });
         }
 
         protected override void OnStop()
@@ -56,7 +80,7 @@ public partial class Service1 : ServiceBase
         class Logger
         {
             FileSystemWatcher watcher;
-            Parse parsedOptions = new Parse();
+            public Parse parsedOptions = new Parse();
             object obj = new object();
             bool enabled = true;
 
@@ -79,56 +103,38 @@ public partial class Service1 : ServiceBase
                 watcher.EnableRaisingEvents = false;
                 enabled = false;
             }
-            public void StartServices()
-            {
-                string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                try
-                {
-                    var repositories = new UnitOfWork(connectionString);
-                    OrderService orderService = new OrderService(repositories);
-                    var ordersInfo = orderService.GetListOfOrders();
-
-                    XmlGenerator<Order> orders = new XmlGenerator<Order>(AppDomain.CurrentDomain.BaseDirectory.Substring(0, AppDomain.CurrentDomain.BaseDirectory.Length - 14) + "Orders.xml");
-                    orders.XmlGenerate(ordersInfo);
-                }
-                catch (Exception trouble)
-                {
-                    var repositories2 = new UnitOfWork(connectionString);
-                    ErrorService service = new ErrorService(repositories2);
-                    service.AddErrors(new Error(trouble.GetType().Name, trouble.Message, DateTime.Now));
-                }
-            }
             // создание файлов
             private void Watcher_Created(object sender, FileSystemEventArgs e)
             {
-                Thread.Sleep(1000);
-
-                string fileName = e.Name;
-                string filePath = e.FullPath;
-                Console.WriteLine(fileName);
-
-                string fileEvent = "создан";
-                Regex regex = new Regex(parsedOptions.options.PathsOptions.Regex);
-
-                if (regex.IsMatch(fileName))
+                ThreadPool.QueueUserWorkItem(async state =>
                 {
-                    RecordEntry("вошли", fileName);
-                    MyFile.EncryptFile(fileName, filePath, parsedOptions.options.EncryptingOptions.Key);
+                    string fileName = e.Name;
+                    string filePath = e.FullPath;
+                    Console.WriteLine(fileName);
 
-                    MyFile.CompressAndMove(fileName, filePath, parsedOptions.options.PathsOptions.TargetPath, parsedOptions.options.CompressOptions.Extension);
+                    string fileEvent = "создан";
+                    Regex regex = new Regex(parsedOptions.options.PathsOptions.Regex);
+                    Console.WriteLine(fileName + " ||| " + regex.IsMatch(fileName));
+                    if (regex.IsMatch(fileName))
+                    {
+                        RecordEntry("вошли", fileName);
+                        await MyFile.EncryptFile(fileName, filePath, parsedOptions.options.EncryptingOptions.Key);
 
-                    MyFile.DecompressFileToTargetDir(fileName, filePath, parsedOptions.options.CompressOptions.Extension);
+                        await MyFile.CompressAndMove(fileName, filePath, parsedOptions.options.PathsOptions.TargetPath, parsedOptions.options.CompressOptions.Extension);
 
-                    string newPath = MyFile.GetPathOfFileInTargetDir(fileName);
-                    newPath += fileName;
+                        await MyFile.DecompressFileToTargetDir(fileName, filePath, parsedOptions.options.CompressOptions.Extension);
 
-                    MyFile.DecryptFile(fileName, newPath, parsedOptions.options.EncryptingOptions.Key);
-                }
+                        string newPath = MyFile.GetPathOfFileInTargetDir(fileName);
+                        newPath += fileName;
 
-                RecordEntry(fileEvent, fileName);
+                        await MyFile.DecryptFile(fileName, newPath, parsedOptions.options.EncryptingOptions.Key);
+                    }
+
+                    RecordEntry(fileEvent, fileName);
+                });
             }
             private void RecordEntry(string fileEvent, string filePath)
-            {
+             {
                 lock (obj)
                 {
                     using (StreamWriter writer = new StreamWriter("D:\\Trash\\templog.txt", true))

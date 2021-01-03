@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
     interface IXmlGenerator
     {
-        void XmlGenerate<T>(IEnumerable<T> info);
+        Task XmlGenerate<T>(IEnumerable<T> info);
     }
 }
